@@ -41,8 +41,9 @@ public class ServerConfiguration {
 		return this.Path;
 	}
 	
-	public String FolderPather()
+	public String getClientFolder()
 	{
 		return this.ClientFolder;
 	}
+
 }

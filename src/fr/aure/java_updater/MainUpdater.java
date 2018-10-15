@@ -1,8 +1,11 @@
 package fr.aure.java_updater;
 
 import java.net.*;
+import java.util.ArrayList;
 
+import fr.aure.java_updater.downloader.FilesDownloader;
 import fr.aure.java_updater.downloader.ServerConfiguration;
+import fr.aure.java_updater.xml.ListFile;
 import fr.aure.java_updater.xml.Reader;
 
 public class MainUpdater {
@@ -21,7 +24,9 @@ public class MainUpdater {
 	
 	public boolean start()
 	{
-		new Reader(this.ServerInformations);
+		Reader instance = new Reader(this.ServerInformations);
+		ArrayList<ListFile> DL = instance.getDL();
+		new FilesDownloader(this.ServerInformations, DL);
 		return true;
 	}
 }
