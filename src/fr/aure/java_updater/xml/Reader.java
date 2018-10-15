@@ -20,9 +20,11 @@ public class Reader {
 	{
 		URL url = null;
 		InputStream in = null;
+		Document doc = null;
 	
 		try {
-			url = new URL(ServerInformations.getProtocol() + "/" + ServerInformations.getHostName() + ServerInformations.getPath() + "xml/download.xml");
+			url = new URL(ServerInformations.getProtocol() + "://" + ServerInformations.getHostName() + ServerInformations.getPath() + "xml/download.xml");
+			System.out.println(url);
 			in = url.openStream();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -33,7 +35,7 @@ public class Reader {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(in);
+			doc = dBuilder.parse(in);
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -42,10 +44,7 @@ public class Reader {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
-		
+		  doc.getDocumentElement ().normalize ();
+          System.out.println ("Root element of the doc is " + doc.getDocumentElement().getNodeName());
 	}
 }

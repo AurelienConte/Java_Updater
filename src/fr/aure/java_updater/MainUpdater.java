@@ -3,6 +3,7 @@ package fr.aure.java_updater;
 import java.net.*;
 
 import fr.aure.java_updater.downloader.ServerConfiguration;
+import fr.aure.java_updater.xml.Reader;
 
 public class MainUpdater {
 	
@@ -20,6 +21,7 @@ public class MainUpdater {
 	
 	public boolean start()
 	{
+		new Reader(this.ServerInformations);
 		return true;
 	}
 }
