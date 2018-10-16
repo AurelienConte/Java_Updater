@@ -25,13 +25,19 @@ public class ProcessDownload extends Thread {
 		URL url = null;
 		
 		try {
-			url = new URL(this.Servers.getProtocol() + "://" + this.Servers.getHostName() + this.Servers.getPath() + "files/" + this.FileInfo.getName());
+			url = new URL(this.Servers.getProtocol() + "://" + this.Servers.getHostName() + this.Servers.getPath() + "files/" + this.Servers.FILES_FOLDER + "/" + this.FileInfo.getName());
 			ReadableByteChannel rbc = Channels.newChannel(url.openStream());
+			@SuppressWarnings("resource")
 			FileOutputStream fos = new FileOutputStream(this.Servers.getClientFolder() + "/" + this.FileInfo.getName());
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+			
+			
 			this.Instance.IncreaseBytesDownloaded(fos.getChannel().size());
 			this.Instance.IncreaseFilesDownloaded(1);
 			this.Instance.updatePourcent();
+			
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

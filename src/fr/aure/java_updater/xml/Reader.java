@@ -28,7 +28,7 @@ public class Reader {
 		Document doc = null;
 		
 		try {
-			url = new URL(ServerInformations.getProtocol() + "://" + ServerInformations.getHostName() + ServerInformations.getPath() + "xml/download.xml");
+			url = new URL(ServerInformations.getProtocol() + "://" + ServerInformations.getHostName() + ServerInformations.getPath() + "xml/" + ServerInformations.getXML_File());
 			System.out.println("XML Download file path : " + url);
 			in = url.openStream();
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -39,7 +39,20 @@ public class Reader {
 		}
 		
 		  doc.getDocumentElement ().normalize ();
+		  ExctractConfig(doc, ServerInformations);
           DL = ExtractList(doc);
+	}
+	
+	public void ExctractConfig(Document doc, ServerConfiguration Server)
+	{
+		NodeList nList = doc.getElementsByTagName("configuration");
+		Node nNode = nList.item(0);
+		
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			String folder = eElement.getElementsByTagName("folder").item(0).getTextContent();
+			Server.FILES_FOLDER = folder;
+		}
 	}
 	
 	public ArrayList<ListFile> getDL()

@@ -3,7 +3,10 @@ import fr.aure.java_updater.MainUpdater;
 
 public class Main {
 	
+	//Remote Server
 	private static String URL_SERVER = "http://localhost/ServerUpdater/";
+	
+	//Local PATH for install
 	private static String FOLDER_PATH = "C:\\laragon\\www\\Updater";
 	
 	/*
@@ -11,7 +14,10 @@ public class Main {
 	 */
 	public static void main(String[] args) 
 	{
-			MainUpdater SUpdate = new MainUpdater(URL_SERVER, FOLDER_PATH);
+			//First you need to init MainUpdater with provided LOCAL FOLDER PATH, URL OF UPDATER SERVER and the XML filename :)
+			MainUpdater SUpdate = new MainUpdater(FOLDER_PATH, URL_SERVER, "download.xml");
+			
+			//next you just need to start the update :) enjoy !
 			SUpdate.start();
 	}
 }

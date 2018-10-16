@@ -15,6 +15,10 @@ public class FilesDownloader {
 		
 		ArrayList<Thread> threads = new ArrayList<Thread>();
 		
+		FilesChecker checkInstance = new FilesChecker(Server, DL);
+		
+		
+		DL = checkInstance.getNewList();
 		this.FilesToDownload = DL.size();
 		
 		System.out.println("Files to download : " + this.FilesToDownload);
@@ -32,41 +36,40 @@ public class FilesDownloader {
 				e.printStackTrace();
 			}
 			
-		
 		System.out.println("Total bytes download : " + this.getBytesDownloaded() + ", Total Files : " + this.getFilesDownloaded());
 	}
 	
-	public void updatePourcent()
+	public synchronized void updatePourcent()
 	{
 		this.PourcentTask = (float) ((FilesDownloaded * 100) / this.FilesToDownload);
 	}
 	
-	public Float getPourcent()
+	public synchronized Float getPourcent()
 	{
 		return this.PourcentTask;
 	}
 	
-	public void IncreaseFilesDownloaded(Integer nbr)
+	public synchronized void IncreaseFilesDownloaded(Integer nbr)
 	{
 		this.FilesDownloaded += nbr;
 	}
 	
-	public Integer getFilesDownloaded()
+	public synchronized Integer getFilesDownloaded()
 	{
 		return this.FilesDownloaded;
 	}
 	
-	public Integer getFilesToDownload()
+	public synchronized Integer getFilesToDownload()
 	{
 		return this.FilesToDownload;
 	}
 	
-	public void IncreaseBytesDownloaded(Long bytes)
+	public synchronized void IncreaseBytesDownloaded(Long bytes)
 	{
 		this.BytesDownloaded += bytes;
 	}
 	
-	public Long getBytesDownloaded()
+	public synchronized Long getBytesDownloaded()
 	{
 		return this.BytesDownloaded;
 	}
