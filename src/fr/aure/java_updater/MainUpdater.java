@@ -17,7 +17,7 @@ public class MainUpdater {
 	 * FOLDER_PATH --> Where you want install files download
 	 */
 	public MainUpdater(String FOLDER_PATH, String URL_PATH, String XML_FILENAME) {
-		try { this.ServerInformations = new ServerConfiguration(URL_PATH, FOLDER_PATH, XML_FILENAME); } catch (MalformedURLException e) { e.printStackTrace(); }
+		try { this.ServerInformations = new ServerConfiguration(URL_PATH, FOLDER_PATH, XML_FILENAME); } catch (MalformedURLException e) { new ErrorHandler(e); }
 		if(this.ServerInformations == null)
 			System.exit(0);
 	}

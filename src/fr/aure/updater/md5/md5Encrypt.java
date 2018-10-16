@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import fr.aure.java_updater.ErrorHandler;
+
 public class md5Encrypt {
 	
 	
@@ -31,16 +33,12 @@ public class md5Encrypt {
 	{
 		File file = new File(path);
 		MessageDigest md5Digest = null;
-		try {
-			md5Digest = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e1) {
-			e1.printStackTrace();
-		}
 		String checksum = null;
 		try {
+			md5Digest = MessageDigest.getInstance("MD5");
 			checksum = getFileChecksum(md5Digest, file);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (NoSuchAlgorithmException|IOException e) {
+			new ErrorHandler(e);
 		}
 		return checksum;
 	}

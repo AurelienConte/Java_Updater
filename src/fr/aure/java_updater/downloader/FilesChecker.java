@@ -15,8 +15,19 @@ public class FilesChecker {
 	public FilesChecker(ServerConfiguration Servers, ArrayList<ListFile> DL) {
 		this.Servers = Servers;
 		this.DL = DL;
+		CreateRootFolder();
 		FilesDelete();
 		FilesCheckMd5();
+	}
+	
+	/*
+	 * Create if folder not exist
+	 */
+	public void CreateRootFolder()
+	{
+		File dest = new File(this.Servers.getClientFolder());
+		if(!dest.exists())
+			dest.getParentFile().mkdirs();
 	}
 	
 	/*

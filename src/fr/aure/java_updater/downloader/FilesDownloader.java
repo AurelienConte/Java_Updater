@@ -2,6 +2,7 @@ package fr.aure.java_updater.downloader;
 
 import java.util.ArrayList;
 
+import fr.aure.java_updater.ErrorHandler;
 import fr.aure.java_updater.xml.ListFile;
 
 public class FilesDownloader {
@@ -33,7 +34,7 @@ public class FilesDownloader {
 			try {
 				item.join();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				new ErrorHandler(e);
 			}
 			
 		System.out.println("Total bytes download : " + this.getBytesDownloaded() + ", Total Files : " + this.getFilesDownloaded());

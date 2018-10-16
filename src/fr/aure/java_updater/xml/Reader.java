@@ -2,7 +2,10 @@ package fr.aure.java_updater.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.channels.ConnectionPendingException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,6 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import fr.aure.java_updater.ErrorHandler;
 import fr.aure.java_updater.downloader.ServerConfiguration;
 
 public class Reader {
@@ -34,10 +38,7 @@ public class Reader {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(in);
-		} catch (SAXException|ParserConfigurationException|IOException e) {
-			e.printStackTrace();
-		}
-		
+		} catch (SAXException|ParserConfigurationException|IOException e) { new ErrorHandler(e); }
 		  doc.getDocumentElement ().normalize ();
 		  ExctractConfig(doc, ServerInformations);
           DL = ExtractList(doc);

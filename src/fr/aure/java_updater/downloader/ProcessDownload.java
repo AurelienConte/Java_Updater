@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
+import fr.aure.java_updater.ErrorHandler;
 import fr.aure.java_updater.xml.ListFile;
 
 public class ProcessDownload extends Thread {
@@ -31,15 +32,12 @@ public class ProcessDownload extends Thread {
 			FileOutputStream fos = new FileOutputStream(this.Servers.getClientFolder() + "/" + this.FileInfo.getName());
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			
-			
 			this.Instance.IncreaseBytesDownloaded(fos.getChannel().size());
 			this.Instance.IncreaseFilesDownloaded(1);
 			this.Instance.updatePourcent();
 			
-			
-			
 		} catch (IOException e) {
-			e.printStackTrace();
+			new ErrorHandler(e);
 		}
 		System.out.println("Download finished : " + this.FileInfo.getName() + ", to : " + this.Servers.getClientFolder() + ", Pourcent : " + this.Instance.getPourcent());
 	}
