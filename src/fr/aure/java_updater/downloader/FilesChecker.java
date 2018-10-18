@@ -26,8 +26,7 @@ public class FilesChecker {
 	public void CreateRootFolder()
 	{
 		File dest = new File(this.Servers.getClientFolder());
-		if(!dest.exists())
-			dest.getParentFile().mkdirs();
+		dest.getParentFile().mkdirs();
 	}
 	
 	/*

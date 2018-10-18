@@ -14,6 +14,8 @@ public class ServerConfiguration {
 	public String FILES_FOLDER = null;
 	
 	public ServerConfiguration(String URL_PATH, String FOLDER_PATH, String XML_File) throws MalformedURLException {
+		if(!URL_PATH.endsWith("/"))
+			URL_PATH = URL_PATH + "/";
 		URL aURL = new URL(URL_PATH);
 		
 		this.protocol = aURL.getProtocol();		
